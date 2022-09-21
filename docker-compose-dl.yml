@@ -23,9 +23,6 @@ services:
         build:
             context: https://github.com/jelletreep/test-researchcloud/
             dockerfile: jupyter.Dockerfile
-        device_requests:
-            - capabilities:
-                - "gpu"
         env_file: https://raw.githubusercontent.com/jelletreep/test-researchcloud/main/.env
         ports:
             - ${JUPYTER_PORT}:${JUPYTER_PORT}
@@ -41,3 +38,9 @@ services:
                 "--notebook-dir=${JUPYTER_DIR}",
                 '--NotebookApp.token=${JUPYTER_TOKEN}'
             ]
+        deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  capabilities: [gpu]

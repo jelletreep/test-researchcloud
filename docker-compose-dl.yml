@@ -3,7 +3,7 @@ services:
     tensorboard:
         image: dl-tensorboard
         build:
-            context: ./
+            context: https://github.com/jelletreep/test-researchcloud/
             dockerfile: tensorboard.Dockerfile
         ports:
             - ${TENSORBOARD_PORT}:${TENSORBOARD_PORT}
@@ -21,12 +21,12 @@ services:
         image: dl-jupyter
         init: true
         build:
-            context: ./
+            context: https://github.com/jelletreep/test-researchcloud/
             dockerfile: jupyter.Dockerfile
         device_requests:
             - capabilities:
                 - "gpu"
-        env_file: ./.env
+        env_file: https://raw.githubusercontent.com/jelletreep/test-researchcloud/main/.env
         ports:
             - ${JUPYTER_PORT}:${JUPYTER_PORT}
         volumes:
